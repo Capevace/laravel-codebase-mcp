@@ -1,10 +1,14 @@
 {
     "name": "mateffy/laravel-codebase-mcp",
-    "description": "An MCP server providing info about Laravel views, routes, models and more to AI agents.",
+    "description": "An MCP server to give Cursor, Aider, etc. the ability to introspect your Laravel codebase directly, by querying for your models, views, routes and classes without raw file search.",
     "keywords": [
         "Lukas Mateffy",
         "laravel",
-        "laravel-codebase-mcp"
+        "laravel-codebase-mcp",
+        "mcp-server",
+        "mcp",
+        "ai",
+        "cursor"
     ],
     "homepage": "https://github.com/mateffy/laravel-codebase-mcp",
     "license": "MIT",
