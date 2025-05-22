@@ -112,6 +112,7 @@ class QueryClasses
     /**
      * @param string[] $name_equals_or
      * @param string[] $name_doesnt_equal_or
+     * @param string[] $name_doesnt_equal_and
      * @param string[] $implements_interfaces_or
      * @param string[] $doesnt_implement_interfaces_or
      * @param string[] $implements_interfaces_and
