@@ -1,92 +1,96 @@
-# :package_description
+<img src="./docs/header.webp" width="100%">
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+![Development Tests Status](https://img.shields.io/github/actions/workflow/status/capevace/laravel-introspect/run-tests.yml?label=dev%20tests)
+![Latest Version](https://img.shields.io/github/v/tag/capevace/laravel-codebase-mcp?label=latest+version)
+![GitHub Release Date](https://img.shields.io/github/release-date/capevace/laravel-codebase-mcp?label=last%20release&cacheSeconds=0)
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+[//]: # (![Packagist Downloads]&#40;https://img.shields.io/packagist/dt/mateffy/laravel-introspect&#41;)
 
-## Support us
+# MCP Server for Laravel Codebase Intelligence and Introspection
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
+For AIs to make sense of your codebase, they need to be able to know what's in it.
+While vector search is a powerful tool for searching through code, it uses a lot of tokens and doesn't even give you the full picture of your codebase for things like views or routes.
+This package implements a [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server for the [mateffy/laravel-introspect](https://github.com/capevace/laravel-introspect) package, which allows you to introspect your codebase and get structured information about it.
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+- 🔍 Let AI query views, routes, classes and models without needing to read through all of the code
+- 🔍 Can even use wildcards (`*`) to match multiple views, routes, classes and models
+- 🔍 Supports querying for things from Laravel packages, which most file searchers can't do
+- 🪄 Gives your AI quick overviews of your datamodel and its relationships
+- 🤖 Supports any AI agent implementing the [MCP protocol](https://modelcontextprotocol.io)
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+<br />
+
+| Query      | Available Filters                                                      |
+|------------|------------------------------------------------------------------------|
+| Views      | name, path, used by view, uses view, extends                           |
+| Routes     | name, URI, controller + fn, methods, middleware                        |
+| Classes    | name / namespace, extends parent, implements interfaces, uses traits   |
+| ⤷ Models   | ... relationships, properties, casts, fillable, hidden, read/writeable |
+| ⤷ Commands | ... signature, description (_coming soon_)                             |
+
+> Name and a few other queries even support wildcard queries (e.g. `components.*.paragraph`)
+
+<br />
+
+### Who is this for?
+
+If you use AI tools like Aider, Cursor, Windsurf or Claude Code to help you build your app, this package is for you.
+Simply configure the MCP server in your agent and it can automatically query your codebase for views, routes, classes and models.
+
+This is especially useful for large codebases where just searching through the code is less practical.
+
+#### Example tasks
+
+- Give your AI an overview of your datamodel and its relationships
+- Refactoring views and making sure it's not used anywhere else
+- Finding all routes that use a specific controller
+- Finding models that use a specific trait or interface
+- Making sure all routes are using the correct middleware
+
+### `laravel-codebase-mcp` vs. `laravel-introspect`
+
+The MCP server uses the `laravel-introspect` package to introspect your codebase and get structured information about it.
+If you want to write tests or run the same queries multiple times, you can also just [use the package directly](https://github.com/capevace/laravel-introspect).
+
+<br />
 
 ## Installation
 
-You can install the package via composer:
+Install the package via composer:
 
-```bash
-composer require :vendor_slug/:package_slug
+```bash  
+composer require mateffy/laravel-codebase-mcp --dev
+```  
+
+And then add it to your AI agent's MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "laravel-introspect": {
+      "command": "php",
+      "args": [
+        "/path/to/your/codebase/artisan",
+        "introspect:mcp"
+      ]
+    }
+  }
+}
 ```
 
-You can publish and run the migrations with:
+<br />
 
-```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
-php artisan migrate
-```
+## Available queries
 
-You can publish the config file with:
+If you want to see all available queries, please check the [`laravel-introspect` package documentation](https://github.com/capevace/laravel-introspect).
 
-```bash
-php artisan vendor:publish --tag=":package_slug-config"
-```
+<br />
 
-This is the contents of the published config file:
+## Acknowledgements
 
-```php
-return [
-];
-```
+The MCP server uses the [php-mcp/server](https://github.com/php-mcp/server) package to implement the MCP protocol.
 
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag=":package_slug-views"
-```
-
-## Usage
-
-```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
-```
-
-## Testing
-
-```bash
-composer test
-```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
-## Credits
-
-- [:author_name](https://github.com/:author_username)
-- [All Contributors](../../contributors)
+<br />
 
 ## License
 
