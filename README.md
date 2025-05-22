@@ -78,6 +78,8 @@ And then add it to your AI agent's MCP configuration:
 }
 ```
 
+> [!NOTE] The MCP server is still in beta, there will probably be bugs!
+
 <br />
 
 ## Available queries
