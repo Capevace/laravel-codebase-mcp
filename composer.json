@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.4",
+        "php": "^8.2",
         "illuminate/contracts": "^10.0||^11.0||^12.0",
         "mateffy/laravel-introspect": "^1.1",
         "php-mcp/server": "^2.0.1",
