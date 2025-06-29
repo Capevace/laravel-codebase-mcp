@@ -2,7 +2,7 @@
 
 All notable changes to `mateffy/laravel-codebase-mcp` will be documented in this file.
 
-## 0.0.3 (_2025-06-29_)
+## 0.1.0 (_2025-06-29_)
 
 - Temporary fix for dependency issue in `php-mcp/server` and ReactPHP. Using forked version of `php-mcp/server` to resolve the issue.
   You might need to add the following repositories to the `composer.json` file:
