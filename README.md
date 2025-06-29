@@ -1,4 +1,4 @@
-<img src="./docs/header.webp" width="100%">
+<img src="./docs/header.png" width="100%">
 
 ![Development Tests Status](https://img.shields.io/github/actions/workflow/status/capevace/laravel-introspect/run-tests.yml?label=dev%20tests)
 ![Latest Version](https://img.shields.io/github/v/tag/capevace/laravel-codebase-mcp?label=latest+version)
