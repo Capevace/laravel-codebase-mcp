@@ -62,6 +62,24 @@ Install the package via composer:
 composer require mateffy/laravel-codebase-mcp --dev
 ```  
 
+> [!NOTE]
+> 
+> At the moment, there is a dependency issue with `php-mcp/server` ([#23](https://github.com/php-mcp/server/issues/23)) and ReactPHP ([#542](https://github.com/reactphp/http/pull/542)). You may temporarily need to use these patched forks if you run into issues when installing `laravel-codebase-mcp` by adding the following to your `composer.json`:
+> ```json composer.json
+> {
+>   "repositories": [
+>     {
+>       "type": "vcs",
+>       "url": "https://github.com/leantime/php-mcp-server.git"
+>     },
+>     {
+>       "type": "vcs",
+>       "url": "https://github.com/Leantime/reactphp-http.git"
+>     }
+>   ]
+> }
+> ````
+
 And then add it to your AI agent's MCP configuration:
 
 ```json
@@ -78,7 +96,7 @@ And then add it to your AI agent's MCP configuration:
 }
 ```
 
-> [!NOTE]  
+> [!IMPORTANT]  
 > The MCP server is still in beta, there will probably be bugs!
 
 <br />
